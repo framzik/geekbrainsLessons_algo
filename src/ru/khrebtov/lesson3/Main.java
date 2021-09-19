@@ -1,6 +1,7 @@
 package ru.khrebtov.lesson3;
 
 public class Main {
+
     public static void main(String[] args) {
 //        MyStack<Integer> myStack = new MyStack<>();
 //
@@ -17,7 +18,6 @@ public class Main {
 //        Expression e = new Expression("()+{}+[{}]");
 //        System.out.println(e.checkBracket());
 
-
 //        MyQueue<Integer> queue = new MyQueue<>();
 //
 //        queue.insert(3);
@@ -29,16 +29,23 @@ public class Main {
 //            System.out.println(queue.remove());
 //        }
 
-        MyPriorityQueue<Integer> mpq = new MyPriorityQueue<>();
+//        MyPriorityQueue<Integer> mpq = new MyPriorityQueue<>();
+//
+//        mpq.insert(5);
+//        mpq.insert(2);
+//        mpq.insert(20);
+//        mpq.insert(21);
+//        mpq.insert(4);
+//
+//        for (int i = 0; i < 5; i++) {
+//            System.out.println(mpq.remove());
+//        }
 
-        mpq.insert(5);
-        mpq.insert(2);
-        mpq.insert(20);
-        mpq.insert(21);
-        mpq.insert(4);
+        reverseString("Hello!");
+    }
 
-        for (int i = 0; i < 5; i++) {
-            System.out.println(mpq.remove());
-        }
+    public static void reverseString(String beforeReverse) {
+        System.out.println("Before reverse: " + beforeReverse);
+        System.out.println("After reverse:" + new StringBuilder(beforeReverse).reverse());
     }
 }
