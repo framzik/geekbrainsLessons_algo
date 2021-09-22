@@ -3,7 +3,9 @@ package ru.khrebtov.lesson4;
 import java.util.Iterator;
 
 public class MyLinkedList<T> implements Iterable<T> {
+
     private class Node {
+
         Node prev;
         T value;
         Node next;
@@ -53,7 +55,8 @@ public class MyLinkedList<T> implements Iterable<T> {
         return new Iter();
     }
 
-    private class Iter implements Iterator<T>{
+    private class Iter implements Iterator<T> {
+
         Node current = new Node(null, first);
 
         @Override
@@ -114,7 +117,6 @@ public class MyLinkedList<T> implements Iterable<T> {
         return temp;
     }
 
-
     public final T getFirst() {
         if (isEmpty()) {
             throw new RuntimeException("list is empty");
@@ -129,6 +131,34 @@ public class MyLinkedList<T> implements Iterable<T> {
         return last.getValue();
     }
 
+    public final int indexOf(T o) {
+        if (isEmpty()) {
+            new RuntimeException("list is empty");
+        }
+        int index = 0;
+        Node x;
+
+        if (o == null) {
+            for (x = this.first; x != null; x = x.next) {
+                if (x.value == null) {
+                    return index;
+                }
+
+                ++index;
+            }
+        } else {
+            for (x = this.first; x != null; x = x.next) {
+                if (o.equals(x.value)) {
+                    return index;
+                }
+
+                ++index;
+            }
+        }
+
+        return -1;
+    }
+
     public void insert(int index, T item) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("index: " + index);
@@ -137,7 +167,7 @@ public class MyLinkedList<T> implements Iterable<T> {
             insertFirst(item);
             return;
         }
-        if (index == size ) {
+        if (index == size) {
             insertLast(item);
             return;
         }
