@@ -73,5 +73,64 @@ public class Main {
 //        mal.insertionSort();
 //        mal.bubbleSort();
 
+        selectionTime();
+        insertionTime();
+        bubbleTime();
+        bubbleOptimizeTime();
+    }
+
+    private static void selectionTime() {
+        MyArrayList<Integer> mal = initList();
+
+        System.out.println("Start ");
+        Long start = System.nanoTime();
+        mal.selectionSort();
+        long time = (System.nanoTime() - start) / 1_000_000_000;
+        System.out.println("End");
+        System.out.println("Time selectionSort: " + time + " sec");
+    }
+
+    private static void insertionTime() {
+        MyArrayList<Integer> mal = initList();
+
+        System.out.println("Start");
+        Long start = System.nanoTime();
+        mal.insertionSort();
+        long time = (System.nanoTime() - start) / 1_000_000_000;
+        System.out.println("End");
+        System.out.println("Time insertionSort: " + time + " sec");
+    }
+
+    private static void bubbleTime() {
+        MyArrayList<Integer> mal = initList();
+
+        System.out.println("Start");
+        Long start = System.nanoTime();
+        mal.bubbleSort();
+        long time = (System.nanoTime() - start) / 1_000_000_000;
+        System.out.println("End");
+        System.out.println("Time bubbleSort: " + time + " sec");
+    }
+
+    private static void bubbleOptimizeTime() {
+        MyArrayList<Integer> mal = initList();
+
+        System.out.println("Start");
+        Long start = System.nanoTime();
+        mal.bubbleSortOptimized();
+        long time = (System.nanoTime() - start) / 1_000_000_000;
+        System.out.println("End");
+        System.out.println("Time bubbleSortOptimized: " + time + " sec");
+    }
+
+    private static MyArrayList<Integer> initList() {
+        int count = 100_000;
+        Random random = new Random();
+        MyArrayList<Integer> mal = new MyArrayList<>(count);
+
+        for (int i = 0; i < count; i++) {
+            mal.add(random.nextInt());
+        }
+        return mal;
     }
 }
