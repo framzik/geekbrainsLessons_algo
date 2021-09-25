@@ -3,19 +3,23 @@ package ru.khrebtov.lesson6;
 import java.util.NoSuchElementException;
 
 public class MyTreeMap<K extends Comparable<K>, V> {
+
     private Node root;
 
     private class Node {
+
         K key;
         V value;
         Node left;
         Node right;
         int size;
+        int height;
 
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
             this.size = 1;
+            this.height = 0;
         }
     }
 
@@ -28,6 +32,17 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             return 0;
         }
         return node.size;
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return node.height;
     }
 
     public boolean isEmpty() {
@@ -81,10 +96,13 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.value = value;
         } else if (cmp < 0) {
             node.left = put(node.left, key, value);
+            node.height = Math.max(height(node.left), height(node.right)) + 1;
         } else {
             node.right = put(node.right, key, value);
+            node.height = Math.max(height(node.left), height(node.right)) + 1;
         }
         node.size = size(node.left) + size(node.right) + 1;
+
         return node;
     }
 
@@ -112,7 +130,29 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         }
         node.left = removeMin(node.left);
         node.size = size(node.left) + size(node.right) + 1;
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
         return node;
+    }
+
+    public boolean isBalanced() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node node) {
+        if (node == null) {
+            return true;
+        }
+        if (node.height != 0) {
+            isBalanced(node.left);
+            isBalanced(node.right);
+            int lh = height(node.left);
+            int rh = height(node.right);
+            return (lh - rh) <= 1;
+        }
+        return true;
     }
 
     public void remove(K key) {
@@ -142,6 +182,7 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.left = temp.left;
         }
         node.size = size(node.left) + size(node.right) + 1;
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
         return node;
     }
 
@@ -158,6 +199,4 @@ public class MyTreeMap<K extends Comparable<K>, V> {
                 node.key + "=" + node.value + " " +
                 toString(node.right);
     }
-
-
 }
