@@ -1,6 +1,11 @@
 package ru.khrebtov.lesson5;
 
+import ru.khrebtov.lesson5.Backpack.Item;
+
+import java.math.BigDecimal;
+
 public class Main {
+
     public static void main(String[] args) {
 //        System.out.println(fact(5));
 //        System.out.println(recFact(5));
@@ -14,12 +19,22 @@ public class Main {
 //        System.out.println(multiply(3, 8));
 //        System.out.println(recMultiply(3, 8));
 
-        reversPrint("qwerty".toCharArray());
-
+//        reversPrint("qwerty".toCharArray());
+//        for (int i = 0; i < 100; i++) {
+//            System.out.println(exponentiation(2L, i));
+//        }
+        int j =5;
+        Item[] items = new Item[j];
+        for (int i = 0; i < j; i++) {
+            items[i] = new Item((int) (Math.random()*100), (int) (Math.random()*100) );
+            System.out.println(items[i]);
+        }
+        Backpack bag = new Backpack(200,items );
+        System.out.println(bag.getBag());
     }
 
-    public static void reversPrint(char[] arr){
-        reversPrint(arr, arr.length-1);
+    public static void reversPrint(char[] arr) {
+        reversPrint(arr, arr.length - 1);
     }
 
     private static void reversPrint(char[] arr, int n) {
@@ -78,7 +93,6 @@ public class Main {
         return b;
     }
 
-
     public static int fact(int n) {
         int f = 1;
         for (int i = 2; i <= n; i++) {
@@ -92,5 +106,19 @@ public class Main {
             return 1;
         }
         return recFact(n - 1) * n;
+    }
+
+    public static BigDecimal exponentiation(Long number, int degree) {
+        if (degree < 0) {
+            throw new RuntimeException("Degree can't be less 1");
+        }
+        if (degree == 0) {
+            return new BigDecimal(1);
+        }
+        if (degree == 1) {
+            return new BigDecimal(number);
+        }
+
+        return exponentiation(number, degree - 1).multiply(new BigDecimal(number));
     }
 }
