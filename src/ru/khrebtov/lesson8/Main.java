@@ -1,6 +1,7 @@
 package ru.khrebtov.lesson8;
 
 public class Main {
+
     public static void main(String[] args) {
 //        int x =  Integer.MIN_VALUE;
 //        System.out.println(x);
@@ -8,28 +9,34 @@ public class Main {
 //        int x = 0x7FFFFFFF;
 //        System.out.println(x);
 
-//        ChainingHashMap<Integer, String> map = new ChainingHashMap<>(7);
-////        map.put(2, "two");
-////        System.out.println(map.contains(2));
-////        System.out.println(map.get(2));
+        ChainingHashMap<Integer, String> map = new ChainingHashMap<>(7);
+        map.put(2, "two");
+        System.out.println(map.contains(2));
+        System.out.println(map.get(2));
 //        Random random = new Random();
 //        for (int i = 0; i < 5; i++) {
 //            map.put(random.nextInt(100), "");
 //        }
+
+        System.out.println(map);
+
+        map.remove(2);
+        map.put(3, "two");
+        map.put(2, "twenty");
+
+        System.out.println(map);
+
+//        LinearProbingHashMap<Integer, String> map = new LinearProbingHashMap<>(7);
 //
+//        map.put(2, "two");
+//        System.out.println(map.contains(2));
+//        System.out.println(map.get(2));
 //        System.out.println(map);
-
-        LinearProbingHashMap<Integer, String> map = new LinearProbingHashMap<>(7);
-
-        map.put(2, "two");
-        System.out.println(map.contains(2));
-        System.out.println(map.get(2));
-        System.out.println(map);
-
-        map.put(11, "11");
-        map.put(10, "");
-        System.out.println(map);
-        map.put(9, "");
-        System.out.println(map);
+//
+//        map.put(11, "11");
+//        map.put(10, "");
+//        System.out.println(map);
+//        map.put(9, "");
+//        System.out.println(map);
     }
 }

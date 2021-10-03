@@ -3,6 +3,7 @@ package ru.khrebtov.lesson8;
 import java.util.LinkedList;
 
 public class ChainingHashMap<K, V> {
+
     private int capacity;
     private int size;
     private final int DEFAULT_CAPACITY = 16;
@@ -26,6 +27,7 @@ public class ChainingHashMap<K, V> {
     }
 
     private class Node {
+
         K key;
         V value;
 
@@ -60,7 +62,7 @@ public class ChainingHashMap<K, V> {
     public void put(K key, V value) {
         checkKeyNotNull(key);
         int i = hash(key);
-        for (Node node : st[i]) {
+        for (Node node: st[i]) {
             if (node.key.equals(key)) {
                 node.value = value;
                 return;
@@ -70,10 +72,16 @@ public class ChainingHashMap<K, V> {
         size++;
     }
 
-    public V get(K key){
+    public void remove(K key) {
         checkKeyNotNull(key);
         int i = hash(key);
-        for (Node node : st[i]) {
+        st[i].removeIf(node -> node.key.equals(key));
+    }
+
+    public V get(K key) {
+        checkKeyNotNull(key);
+        int i = hash(key);
+        for (Node node: st[i]) {
             if (node.key.equals(key)) {
                 return node.value;
             }
@@ -85,7 +93,7 @@ public class ChainingHashMap<K, V> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < st.length; i++) {
-            for (Node node : st[i]) {
+            for (Node node: st[i]) {
                 sb.append(node.key).append(" = ").append(node.value).append(", ");
             }
             sb.append(System.lineSeparator());
